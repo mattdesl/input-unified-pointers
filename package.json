@@ -1,0 +1,36 @@
+{
+  "name": "input-unified-pointers",
+  "version": "1.0.0",
+  "description": "A unified input to use mouse and touch inputs as if they were the same. Essentially the mouse is another touch point.",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Tomasz Dysinski",
+    "email": "oz@bunnybones.com",
+    "url": "https://github.com/bunnybones1"
+  },
+  "dependencies": {
+    "input-mouse": "^2.0.1",
+    "input-touch": "^1.0.0",
+    "signals": "^1.0.0"
+  },
+  "devDependencies": {
+    "dom-quick-text": "^1.0.0"
+  },
+  "scripts": {
+    "test": "beefy test.js --live --open"
+  },
+  "keywords": [
+    "mouse",
+    "touch",
+    "multitouch"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bunnybones1/input-unified-pointers.git"
+  },
+  "homepage": "https://github.com/bunnybones1/input-unified-pointers",
+  "bugs": {
+    "url": "https://github.com/bunnybones1/input-unified-pointers/issues"
+  }
+}
