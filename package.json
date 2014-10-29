@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "input-mouse": "^2.0.1",
-    "input-touch": "^1.0.0",
+    "input-touch": "^1.1.0",
     "signals": "^1.0.0"
   },
   "devDependencies": {
