@@ -10,8 +10,8 @@
     "url": "https://github.com/bunnybones1"
   },
   "dependencies": {
-    "input-mouse": "^3.0.1",
-    "input-touch": "^2.0.0",
+    "input-mouse": "^3.0.2",
+    "input-touch": "^2.0.1",
     "signals": "^1.0.0"
   },
   "devDependencies": {
