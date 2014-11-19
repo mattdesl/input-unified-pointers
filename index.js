@@ -2,7 +2,7 @@ var Mouse = require('input-mouse');
 var Touch = require('input-touch');
 var signals = require('signals');
 
-var mouseID = 20;
+var mouseID = 10;
 
 
 //filter out fake clicks that browsers send after touch events
@@ -37,7 +37,9 @@ function logHistory(x, y, time) {
 }
 //
 
-function UnifiedPointers() {
+function UnifiedPointers(targetElement) {
+	this.touch = new Touch(targetElement);
+	this.mouse = new Mouse(targetElement);
 	this.onPointerSelectSignal = new signals.Signal();
 	this.onPointerDownSignal = new signals.Signal();
 	this.onPointerUpSignal = new signals.Signal();
@@ -57,29 +59,29 @@ function UnifiedPointers() {
 	}
 
 
-	Touch.onTouchStartSignal.add(this.onPointerDownSignal.dispatch);
-	Touch.onTouchMoveSignal.add(this.onPointerDragSignal.dispatch);
-	Touch.onTouchEndSignal.add(this.onPointerUpSignal.dispatch);
-	Touch.onTouchTapSignal.add(filteredSelect);
+	this.touch.onTouchStartSignal.add(this.onPointerDownSignal.dispatch);
+	this.touch.onTouchMoveSignal.add(this.onPointerDragSignal.dispatch);
+	this.touch.onTouchEndSignal.add(this.onPointerUpSignal.dispatch);
+	this.touch.onTouchTapSignal.add(filteredSelect);
 	
-	Mouse.onDownSignal.add(function(x, y) {
+	this.mouse.onDownSignal.add(function(x, y) {
 		_this.onPointerDownSignal.dispatch(x, y, mouseID);
 	});
-	Mouse.onUpSignal.add(function(x, y) {
+	this.mouse.onUpSignal.add(function(x, y) {
 		_this.onPointerUpSignal.dispatch(x, y, mouseID);
 	});
-	Mouse.onDragSignal.add(function(x, y) {
+	this.mouse.onDragSignal.add(function(x, y) {
 		_this.onPointerDragSignal.dispatch(x, y, mouseID);
 	});
-	Mouse.onHoverSignal.add(function(x, y) {
+	this.mouse.onHoverSignal.add(function(x, y) {
 		_this.onPointerHoverSignal.dispatch(x, y, mouseID);
 	});
-	Mouse.onMoveSignal.add(function(x, y) {
+	this.mouse.onMoveSignal.add(function(x, y) {
 		_this.onPointerMoveSignal.dispatch(x, y, mouseID);
 	});
-	Mouse.onClickSignal.add(function(x, y) {
+	this.mouse.onClickSignal.add(function(x, y) {
 		filteredSelect(x, y, mouseID);
 	});
 }
 
-module.exports = new UnifiedPointers();
+module.exports = UnifiedPointers;
