@@ -2,7 +2,6 @@ var Mouse = require('input-mouse');
 var Touch = require('input-touch');
 var signals = require('signals');
 
-var mouseID = 10;
 
 
 //filter out fake clicks that browsers send after touch events
@@ -47,6 +46,8 @@ function UnifiedPointers(targetElement) {
 	this.onPointerHoverSignal = new signals.Signal();
 	this.onPointerDragSignal = new signals.Signal();
 
+
+	this.mouseID = 10;
 	var _this = this;
 
 	//filter out fake clicks that browsers send after touch events
@@ -65,22 +66,22 @@ function UnifiedPointers(targetElement) {
 	this.touch.onTouchTapSignal.add(filteredSelect);
 	
 	this.mouse.onDownSignal.add(function(x, y) {
-		_this.onPointerDownSignal.dispatch(x, y, mouseID);
+		_this.onPointerDownSignal.dispatch(x, y, _this.mouseID);
 	});
 	this.mouse.onUpSignal.add(function(x, y) {
-		_this.onPointerUpSignal.dispatch(x, y, mouseID);
+		_this.onPointerUpSignal.dispatch(x, y, _this.mouseID);
 	});
 	this.mouse.onDragSignal.add(function(x, y) {
-		_this.onPointerDragSignal.dispatch(x, y, mouseID);
+		_this.onPointerDragSignal.dispatch(x, y, _this.mouseID);
 	});
 	this.mouse.onHoverSignal.add(function(x, y) {
-		_this.onPointerHoverSignal.dispatch(x, y, mouseID);
+		_this.onPointerHoverSignal.dispatch(x, y, _this.mouseID);
 	});
 	this.mouse.onMoveSignal.add(function(x, y) {
-		_this.onPointerMoveSignal.dispatch(x, y, mouseID);
+		_this.onPointerMoveSignal.dispatch(x, y, _this.mouseID);
 	});
 	this.mouse.onClickSignal.add(function(x, y) {
-		filteredSelect(x, y, mouseID);
+		filteredSelect(x, y, _this.mouseID);
 	});
 }
 
