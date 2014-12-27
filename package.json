@@ -1,6 +1,6 @@
 {
   "name": "input-unified-pointers",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "A unified input to use mouse and touch inputs as if they were the same. Essentially the mouse is another touch point.",
   "main": "index.js",
   "license": "MIT",
