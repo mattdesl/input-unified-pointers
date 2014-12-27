@@ -46,8 +46,16 @@ function UnifiedPointers(targetElement) {
 	this.onPointerHoverSignal = new signals.Signal();
 	this.onPointerDragSignal = new signals.Signal();
 
-
 	this.mouseID = 10;
+
+	this.positionsById = [];
+	for(var i = 0; i <= this.mouseID; i++) {
+		this.positionsById[i] = {
+			x: 0,
+			y: 0
+		}
+	}
+
 	var _this = this;
 
 	//filter out fake clicks that browsers send after touch events
@@ -61,7 +69,12 @@ function UnifiedPointers(targetElement) {
 
 
 	this.touch.onTouchStartSignal.add(this.onPointerDownSignal.dispatch);
-	this.touch.onTouchMoveSignal.add(this.onPointerDragSignal.dispatch);
+	this.touch.onTouchMoveSignal.add(function(x, y, id) {
+		_this.positionsById[id].x = x;
+		_this.positionsById[id].y = y;
+
+		_this.onPointerDragSignal.dispatch(x, y, id);
+	});
 	this.touch.onTouchEndSignal.add(this.onPointerUpSignal.dispatch);
 	this.touch.onTouchTapSignal.add(filteredSelect);
 	
@@ -78,6 +91,8 @@ function UnifiedPointers(targetElement) {
 		_this.onPointerHoverSignal.dispatch(x, y, _this.mouseID);
 	});
 	this.mouse.onMoveSignal.add(function(x, y) {
+		_this.positionsById[_this.mouseID].x = x;
+		_this.positionsById[_this.mouseID].y = y;
 		_this.onPointerMoveSignal.dispatch(x, y, _this.mouseID);
 	});
 	this.mouse.onClickSignal.add(function(x, y) {

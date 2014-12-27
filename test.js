@@ -93,6 +93,10 @@ function preparePointer(element) {
 	pointers.touch.testStart(testCoords.x, testCoords.y, 0);
 	pointers.touch.testMove(testCoords.x + 200, testCoords.y + 100, 0);
 	pointers.touch.testEnd(testCoords.x + 200, testCoords.y + 100, 0);
+
+	setTimeout(function() {
+		console.log(pointers.positionsById[10]);
+	}, 1000);
 }
 
 preparePointer(document);
