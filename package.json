@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "input-mouse": "^3.0.4",
-    "input-touch": "^2.0.1",
+    "input-touch": "git://github.com/mattdesl/input-touch#patch-1",
     "signals": "^1.0.0"
   },
   "devDependencies": {
